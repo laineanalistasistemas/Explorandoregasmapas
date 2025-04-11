@@ -1,0 +1,106 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "-pVhOfzLx9us"
+      },
+      "source": [
+        "# Using Google Colab with GitHub\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "\n",
+        "import random\n",
+        "\n",
+        "def gerar_questao(operacao, dificuldade):\n",
+        "  \"\"\"Gera uma questão de matemática aleatória.\"\"\"\n",
+        "\n",
+        "  if dificuldade == 1:\n",
+        "    num1 = random.randint(1, 10)\n",
+        "    num2 = random.randint(1, 10)\n",
+        "  elif dificuldade == 2:\n",
+        "    num1 = random.randint(10, 50)\n",
+        "    num2 = random.randint(10, 50)\n",
+        "  elif dificuldade == 3:\n",
+        "    num1 = random.randint(50, 100)\n",
+        "    num2 = random.randint(50, 100)\n",
+        "  else:\n",
+        "    return \"Dificuldade inválida.\"\n",
+        "\n",
+        "  if operacao == \"+\":\n",
+        "    resposta = num1 + num2\n",
+        "    questao = f\"{num1} + {num2} = ?\"\n",
+        "  elif operacao == \"-\":\n",
+        "    resposta = num1 - num2\n",
+        "    questao = f\"{num1} - {num2} = ?\"\n",
+        "  elif operacao == \"*\":\n",
+        "    resposta = num1 * num2\n",
+        "    questao = f\"{num1} * {num2} = ?\"\n",
+        "  elif operacao == \"/\":\n",
+        "    if num2 == 0:  # Evita divisão por zero\n",
+        "        num2 = 1\n",
+        "    resposta = num1 / num2\n",
+        "    questao = f\"{num1} / {num2} = ?\"\n",
+        "  else:\n",
+        "    return \"Operação inválida.\"\n",
+        "\n",
+        "  return questao, resposta\n",
+        "\n",
+        "\n",
+        "def jogo_matematica():\n",
+        "  \"\"\"Inicia o jogo de desafio matemático.\"\"\"\n",
+        "\n",
+        "  nome_jogador = input(\"Digite seu nome: \")\n",
+        "  print(f\"Olá, {nome_jogador}! Bem-vindo ao Desafio de Matemática.\")\n",
+        "\n",
+        "  pontuacao = 0\n",
+        "  num_questoes = 5 # Número de questões por jogo\n",
+        "\n",
+        "  for _ in range(num_questoes):\n",
+        "    operacoes = [\"+\", \"-\", \"*\", \"/\"]\n",
+        "    operacao = random.choice(operacoes)\n",
+        "    dificuldade = random.randint(1, 3)\n",
+        "    questao, resposta_correta = gerar_questao(operacao, dificuldade)\n",
+        "\n",
+        "    print(\"\\nQuestão:\", questao)\n",
+        "    try:\n",
+        "        resposta_jogador = float(input(\"Sua resposta: \"))\n",
+        "        if abs(resposta_jogador - resposta_correta) < 1e-6: #tolerância para erros de precisão de ponto flutuante\n",
+        "            print(\"Correto!\")\n",
+        "            pontuacao += 1\n",
+        "        else:\n",
+        "            print(f\"Incorreto. A resposta correta é {resposta_correta}\")\n",
+        "    except ValueError:\n",
+        "      print(\"Resposta inválida. Digite um número.\")\n",
+        "\n",
+        "\n",
+        "  print(f\"\\n{nome_jogador}, sua pontuação final é: {pontuacao}/{num_questoes}\")\n",
+        "\n",
+        "if __name__ == \"__main__\":\n",
+        "  jogo_matematica()\n"
+      ],
+      "metadata": {
+        "id": "tWKRmxn2BxZq"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "colab-github-demo.ipynb",
+      "provenance": []
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
